@@ -9,19 +9,19 @@ const App = () => {
   const [products, setProducts] = useState([
     {
       name: "Mountain Dew",
-      cost: "$9.99",
-      quantity: 0,
+      cost: "$14.50",
+      quantity: 2,
     },
 
     {
       name: "Desperados",
-      cost: "$15.50",
-      quantity: 0,
+      cost: "$20.00",
+      quantity: 6,
     },
     {
       name: "Jack Daniels",
-      cost: "$13.40",
-      quantity: 0,
+      cost: "$18.75",
+      quantity: 4,
     },
   ]);
 
