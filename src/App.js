@@ -25,7 +25,7 @@ const App = () => {
     },
   ]);
 
-  const resetQuantity = () => {
+  const resetToZero = () => {
     products.forEach((item) => item.quantity = 0);
     setProducts([...products]);
   };
@@ -63,7 +63,7 @@ const App = () => {
           <div className="totals-btn-group">
             <button
               onClick={() => {
-                resetQuantity(); 
+                resetToZero(); 
               }}
             >
               clear
