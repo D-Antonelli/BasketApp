@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 
-const Item = ({ name, price, sendData}) => {
+const Item = ({ name, price, sendQty}) => {
     const [ totalCost, setTotalCost ] = useState(0);
     const [ qty, setQty ] = useState(0);
-
+   
     const onQtyChange = (e) => {
         setQty(e.target.value);
-        
     }
+
 
     useEffect(() => {
         setTotalCost(qty * price);
-        sendData(qty * price);
+        sendQty(qty);     
     }, [qty]);
 
 
