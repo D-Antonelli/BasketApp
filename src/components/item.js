@@ -4,7 +4,11 @@ const Item = ({ name, price, sendQty, quantity}) => {
   const [totalCost, setTotalCost] = useState(0);
 
   const onQtyChange = (e) => {
-    sendQty(e.target.value);
+      let userQtyInput = e.target.value;
+      //check if quantity is number && not floating number
+      if(!isNaN(userQtyInput) && !userQtyInput.includes("." || ",")) {
+        sendQty((userQtyInput));
+      }
   };
 
   useEffect(() => {
