@@ -59,12 +59,10 @@ const App = () => {
           ))}
         </div>
         <div className="totals">
-          <h3>${totalCost}</h3>
+          <h3>${totalCost.toFixed(2)}</h3>
           <div className="totals-btn-group">
             <button
-              onClick={() => {
-                resetToZero(); 
-              }}
+              onClick={resetToZero}
             >
               clear
             </button>
