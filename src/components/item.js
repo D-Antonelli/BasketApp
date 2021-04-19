@@ -1,40 +1,40 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-const Item = ({ name, price, sendQty}) => {
-    const [ totalCost, setTotalCost ] = useState(0);
-    const [ qty, setQty ] = useState(0);
-   
-    const onQtyChange = (e) => {
-        setQty(e.target.value);
-    }
+const Item = ({ name, price, sendQty, quantity}) => {
+  const [totalCost, setTotalCost] = useState(0);
 
+  const onQtyChange = (e) => {
+    sendQty(e.target.value);
+  };
 
-    useEffect(() => {
-        setTotalCost(qty * price);
-        sendQty(qty);     
-    }, [qty]);
+  useEffect(() => {
+    setTotalCost(quantity* price);
+  }, [price, quantity]);
 
-
-    return (
-        <div className="item">
-        <tr className="itemRow">
+  return (
+    <div className="item">
+      <tr className="itemRow">
         <td>
-          <h3>{name}</h3>  
+          <h3>{name}</h3>
         </td>
         <td>
-         <input className="changeQuantity" size="2" maxLength="3" onChange={onQtyChange} value={qty}></input>   
+          <input
+            className="changeQuantity"
+            size="2"
+            maxLength="3"
+            onChange={onQtyChange}
+            value={quantity}
+          ></input>
         </td>
         <td className="cost">
-          <h4>${totalCost}</h4>  
+          <h4>${totalCost}</h4>
         </td>
         <td>
-            <button>x</button>
+          <button>x</button>
         </td>
-        </tr>
-        </div>
-        
-    )
-}
-
+      </tr>
+    </div>
+  );
+};
 
 export default Item;
