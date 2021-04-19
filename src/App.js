@@ -5,28 +5,35 @@ import Item from "./components/item";
 
 const App = () => {
   const [ totalCost, setTotalCost ] = useState(0);
-  const [ itemTotal, setItemTotal ] = useState(0);
-
-  const [products] = useState([
+ 
+  const [products, setProducts] = useState([
     {
       name: 'Mountain Dew',
       cost: '$9.99',
+      quantity: 0
     },
 
     {
       name: 'Desperados',
-      cost: '$15.50'
+      cost: '$15.50',
+      quantity: 0
     },
     {
       name: 'Jack Daniels',
-      cost: '$13.40'
+      cost: '$13.40',
+      quantity: 0
     }
   ]);
 
+
+  const getTotalCost = items => {
+     return items.reduce((prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity, 0);
+  }
+
   useEffect(() => {
-    setTotalCost(totalCost + itemTotal);
-  }, [itemTotal])
-  
+    setTotalCost(getTotalCost(products))
+  }, [products]);
+
 
   return (
     <div className="App">
@@ -36,13 +43,14 @@ const App = () => {
             <Item
               key={index}
               name={product.name}
-              sendData={setItemTotal}
+              sendQty={qty => {products[index].quantity = qty;
+                              setProducts([...products])}}
               price={product.cost.replace("$", "")}
             ></Item>
           ))}
         </div>
         <div className="totals">
-          <h3>{totalCost}</h3>
+          <h3>${totalCost}</h3>
           <div className="totals-btn-group">
             <button>clear</button>
             <button>check out</button>
