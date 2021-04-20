@@ -16,21 +16,21 @@ const Item = ({ name, price, sendQty, quantity}) => {
   }, [price, quantity]);
 
   return (
-    <div className="item">
+    <div className="item h-16 flex items-center border-b-2">
       <tr className="itemRow">
-        <td>
-          <h3>{name}</h3>
+        <td className="w-96">
+          <h3 className="font-bold">{name}</h3>
         </td>
-        <td>
+        <td className="w-32">
           <input
-            className="changeQuantity"
+            className="changeQuantity capitalize border rounded h-8 text-center"
             size="2"
             maxLength="3"
             onChange={onQtyChange}
             value={quantity}
           ></input>
         </td>
-        <td className="cost">
+        <td className="cost w-32">
           <h4>${totalCost}</h4>
         </td>
         <td>
