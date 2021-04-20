@@ -5,7 +5,6 @@ import Title from "./components/title";
 
 const App = () => {
   const [totalCost, setTotalCost] = useState(0);
-
   const [products, setProducts] = useState([
     {
       name: "Mountain Dew",
@@ -58,10 +57,13 @@ const App = () => {
   },[])
 
     const getTotalCost = (items) => {
-      return items.reduce(
+      try {
+        return items.reduce(
         (prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity,
         0
-      );
+      ); } catch(e) {
+        console.log("Array is null");
+      };
     };
 
   return (
@@ -69,13 +71,12 @@ const App = () => {
       {/*container*/}
       <div
         className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll"
-        data-testid="basket"
       >
         {/* product title */}
         <Title />
         {/* basket*/}
         <div className="items">
-          {products.map((product, index) => (
+          {products && products.length > 0 && products.map((product, index) => (
             <Item
               key={index}
               name={product.name}
@@ -91,7 +92,7 @@ const App = () => {
         <div className="totals flex flex-col items-end mt-5">
           <h3 className="font-bold">
             <span className="capitalize mr-5">subtotal:</span>$
-            {totalCost.toFixed(2)}
+            {(totalCost && totalCost.toFixed(2)) || 0}
           </h3>
           <div className="totals-btn-group mt-5">
             <button
