@@ -25,21 +25,44 @@ const App = () => {
     }
   ]);
 
+  /* Cache products in the local storage */
+  const cacheProductList = JSONList => {
+    localStorage.setItem("array", JSON.stringify(JSONList));
+  }
+
+  /* Reset items */
   const resetToZero = () => {
     products.forEach((item) => (item.quantity = 0));
-    setProducts([...products]);
+    saveSettings();
   };
 
-  const getTotalCost = (items) => {
-    return items.reduce(
-      (prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity,
-      0
-    );
-  };
+  /* Update item quantity in product array */
+  const refreshItemQty = (qty, itemIndex) => {
+    products[itemIndex].quantity = qty;
+    saveSettings();
+  }
+
+  const saveSettings = () => {
+    setProducts([...products]);
+    cacheProductList(products);
+  }
 
   useEffect(() => {
     setTotalCost(getTotalCost(products));
   }, [products]);
+
+  /* Retrive last basket settings upon page refresh */
+  useEffect(() => {
+    let cachedArray = JSON.parse(localStorage.getItem("array"));
+    setProducts(cachedArray);
+  },[])
+
+    const getTotalCost = (items) => {
+      return items.reduce(
+        (prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity,
+        0
+      );
+    };
 
   return (
     <div className="App h-screen bg-indigo-200 text-lg overflow-hidden">
@@ -57,8 +80,7 @@ const App = () => {
               key={index}
               name={product.name}
               sendQty={(qty) => {
-                products[index].quantity = qty;
-                setProducts([...products]);
+                refreshItemQty(qty, index);
               }}
               price={product.cost.replace("$", "")}
               quantity={product.quantity}
