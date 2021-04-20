@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import ReactDOM from "react-dom";
 import App from './App';
 import "@testing-library/jest-dom";
 
-it('renders welcome message', () => {
-    render(<App/>);
-    expect(screen.getByText('Hello Basket')).toBeInTheDocument();
+it("renders without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<App />, div);
 });
