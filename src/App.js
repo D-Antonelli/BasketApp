@@ -76,7 +76,7 @@ const App = () => {
       {/*container*/}
       <div className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
         {/* product title */}
-        <TableHeaderRow row1="products" row2="quantity" row3="total" />
+        <TableHeaderRow row1="product" row2="quantity" row3="total" />
         {/* basket*/}
         <div className="items">
           {products &&
