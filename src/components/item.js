@@ -16,8 +16,7 @@ const Item = ({ name, price, sendQty, quantity}) => {
   }, [price, quantity]);
 
   return (
-    <div className="item h-16 flex items-center border-b-2">
-      <tbody>
+    <table className="item h-16 flex items-center border-b-2">
         <tr className="itemRow">
           <td className="w-96">
             <h3 className="font-bold">{name}</h3>
@@ -39,8 +38,7 @@ const Item = ({ name, price, sendQty, quantity}) => {
             <button>x</button>
           </td>
         </tr>
-      </tbody>
-    </div>
+    </table>
   );
 };
 

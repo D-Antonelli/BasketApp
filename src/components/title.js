@@ -1,6 +1,6 @@
 const Title = () => {
   return (
-    <div className="title-row hidden bg-gray-300 pt-2 pb-2 md:block">
+    <table className="title-row hidden bg-gray-300 pt-2 pb-2 md:block">
       <tr>
         <td>
           <h3 className="w-96 capitalize font-bold">product</h3>
@@ -10,7 +10,7 @@ const Title = () => {
         </td>
         <td className="w-32 capitalize font-bold">total</td>
       </tr>
-    </div>
+    </table>
   );
 };
 
