@@ -1,50 +1,54 @@
 import React, { useState, useEffect } from "react";
 
 import Item from "./components/item";
-import Title from "./components/title";
+import TableHeaderRow from "./components/tableHeaderRow";
+
+const items = [
+  {
+    name: "Mountain Dew",
+    cost: "14.50",
+    quantity: 2,
+  },
+
+  {
+    name: "Desperados",
+    cost: "20.00",
+    quantity: 6,
+  },
+  {
+    name: "Jack Daniels",
+    cost: "18.75",
+    quantity: 4,
+  },
+];
 
 const App = () => {
   const [totalCost, setTotalCost] = useState(0);
-  const [products, setProducts] = useState([
-    {
-      name: "Mountain Dew",
-      cost: "$14.50",
-      quantity: 2,
-    },
-
-    {
-      name: "Desperados",
-      cost: "$20.00",
-      quantity: 6,
-    },
-    {
-      name: "Jack Daniels",
-      cost: "$18.75",
-      quantity: 4,
-    }
-  ]);
+  const [products, setProducts] = useState(items);
 
   /* Cache products in the local storage */
-  const cacheProductList = JSONList => {
+  const cacheProductList = (JSONList) => {
     localStorage.setItem("array", JSON.stringify(JSONList));
-  }
+  };
 
   /* Reset items */
   const resetToZero = () => {
-    products.forEach((item) => (item.quantity = 0));
-    saveSettings();
+    let newArr = products.reduce((acc, obj) => {
+      obj.quantity = 0;
+      acc.push(obj);
+      return acc;
+    }, []);
+    setProducts(newArr);
+    cacheProductList(products);
   };
 
   /* Update item quantity in product array */
   const refreshItemQty = (qty, itemIndex) => {
-    products[itemIndex].quantity = qty;
-    saveSettings();
-  }
-
-  const saveSettings = () => {
-    setProducts([...products]);
+    let newArr = products.slice();
+    newArr[itemIndex].quantity = qty;
+    setProducts(newArr);
     cacheProductList(products);
-  }
+  };
 
   useEffect(() => {
     setTotalCost(getTotalCost(products));
@@ -54,39 +58,40 @@ const App = () => {
   useEffect(() => {
     let cachedArray = JSON.parse(localStorage.getItem("array"));
     setProducts(cachedArray);
-  },[])
+  }, []);
 
-    const getTotalCost = (items) => {
-      try {
-        return items.reduce(
+  const getTotalCost = (items) => {
+    try {
+      return items.reduce(
         (prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity,
         0
-      ); } catch(e) {
-        console.log("Array is null");
-      };
-    };
+      );
+    } catch (e) {
+      console.log("Array is null");
+    }
+  };
 
   return (
     <div className="App h-screen bg-indigo-200 text-lg overflow-hidden">
       {/*container*/}
-      <div
-        className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll"
-      >
+      <div className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
         {/* product title */}
-        <Title />
+        <TableHeaderRow row1="products" row2="quantity" row3="total" />
         {/* basket*/}
         <div className="items">
-          {products && products.length > 0 && products.map((product, index) => (
-            <Item
-              key={index}
-              name={product.name}
-              sendQty={(qty) => {
-                refreshItemQty(qty, index);
-              }}
-              price={product.cost.replace("$", "")}
-              quantity={product.quantity}
-            ></Item>
-          ))}
+          {products &&
+            products.length > 0 &&
+            products.map((product, index) => (
+              <Item
+                key={index}
+                name={product.name}
+                sendQty={(qty) => {
+                  refreshItemQty(qty, index);
+                }}
+                price={product.cost.replace("$", "")}
+                quantity={product.quantity}
+              ></Item>
+            ))}
         </div>
         {/* basket totals */}
         <div className="totals flex flex-col items-end mt-5">
@@ -110,7 +115,5 @@ const App = () => {
     </div>
   );
 };
-
-
 
 export default App;
