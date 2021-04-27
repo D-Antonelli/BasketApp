@@ -6,13 +6,17 @@ const Item = ({ name, price, sendQty, quantity}) => {
   const onQtyChange = (e) => {
       let userQtyInput = e.target.value;
       //check if quantity is number && not floating number
-      if(!isNaN(userQtyInput) && !userQtyInput.includes("." || ",")) {
+      if(!isNaN(userQtyInput) && !userQtyInput.includes("." || "," || "-")) {
         sendQty((userQtyInput));
       }
   };
 
+  const calcTotalCost = (qty, price) => {
+    return qty * price;
+  }
+
   useEffect(() => {
-    setTotalCost(quantity* price);
+    setTotalCost(calcTotalCost(quantity, price));
   }, [price, quantity]);
 
   return (
