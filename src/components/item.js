@@ -12,7 +12,8 @@ const Item = ({ name, price, sendQty, quantity}) => {
   };
 
   const calcTotalCost = (qty, price) => {
-    return qty * price;
+    let total = qty * price;
+    return total.toFixed(2);
   }
 
   useEffect(() => {
