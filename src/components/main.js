@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Item from "./item";
 import TableHeaderRow from "./tableHeaderRow";
 
-
-//https://www.techomoro.com/how-to-create-a-multi-page-website-with-react-in-5-minutes/
 const items = [
   {
     name: "Mountain Dew",
@@ -29,11 +27,6 @@ const Main = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [products, setProducts] = useState(items);
 
-  /* Cache products in the local storage */
-  const cacheProductList = (JSONList) => {
-    localStorage.setItem("array", JSON.stringify(JSONList));
-  };
-
   /* Reset items */
   const resetToZero = () => {
     let newArr = products.reduce((acc, obj) => {
@@ -42,7 +35,6 @@ const Main = () => {
       return acc;
     }, []);
     setProducts(newArr);
-    cacheProductList(products);
   };
 
   /* Update item quantity in product array */
@@ -50,33 +42,35 @@ const Main = () => {
     let newArr = products.slice();
     newArr[itemIndex].quantity = qty;
     setProducts(newArr);
-    cacheProductList(products);
   };
+
+  /* Retrive last basket settings upon page refresh */
+  useEffect(() => {
+    let cachedArray = JSON.parse(localStorage.getItem("array"));
+    if(cachedArray) {
+      setProducts(cachedArray);
+    }
+  }, []);
+
+  /* Cache products in the local storage */
+  useEffect(() => {
+    localStorage.setItem("array", JSON.stringify(products));
+  }, [products]);
 
   useEffect(() => {
     setTotalCost(getTotalCost(products));
   }, [products]);
 
-  /* Retrive last basket settings upon page refresh */
-  useEffect(() => {
-    let cachedArray = JSON.parse(localStorage.getItem("array"));
-    setProducts(cachedArray);
-  }, []);
-
   const getTotalCost = (items) => {
     try {
       return items.reduce(
-        (prev, curr) => prev + curr.cost.replace("$", "") * curr.quantity,
+        (prev, curr) => prev + curr.cost * curr.quantity,
         0
       );
     } catch (e) {
       console.log("Array is null");
     }
   };
-
-//   const onCheckout = () => {
-//       return <Redirect to="/checkout"/>
-//   }
 
   return (
     <div className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
@@ -90,10 +84,8 @@ const Main = () => {
             <Item
               key={index}
               name={product.name}
-              sendQty={(qty) => {
-                refreshItemQty(qty, index);
-              }}
-              price={product.cost.replace("$", "")}
+              sendQty={(qty) => refreshItemQty(qty, index)}
+              price={product.cost}
               quantity={product.quantity}
             ></Item>
           ))}
@@ -111,12 +103,10 @@ const Main = () => {
           >
             clear
           </button>
-           <Link
-              to="/checkout"
-            >
-          <button className="ml-4 capitalize border-2 py-2 px-8 font-medium rounded-xl bg-indigo-900 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-600">
-            checkout
-          </button>
+          <Link to="/checkout">
+            <button className="ml-4 capitalize border-2 py-2 px-8 font-medium rounded-xl bg-indigo-900 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-600">
+              checkout
+            </button>
           </Link>
         </div>
       </div>
