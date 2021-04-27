@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import Item from "./item";
 import TableHeaderRow from "./tableHeaderRow";
 
 const items = [
   {
     name: "Mountain Dew",
-    cost: "14.50",
+    cost: "14.52",
     quantity: 2,
   },
 
   {
     name: "Desperados",
-    cost: "20.00",
-    quantity: 6,
+    cost: "19.90",
+    quantity: 1,
   },
   {
     name: "Jack Daniels",
     cost: "18.75",
-    quantity: 4,
+    quantity: 2,
   },
 ];
-
+//localStorage.clear()
 const Main = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [products, setProducts] = useState(items);
@@ -44,18 +43,27 @@ const Main = () => {
     setProducts(newArr);
   };
 
-  /* Retrive last basket settings upon page refresh */
-  useEffect(() => {
+  const qtyFormatter = (qty) => {
+    return qty >= 0 && qty % 1 === 0 ? qty : 0;
+  };
+
+  const costFormatter = (cost) => {
+    return cost >= 0 ? cost : 0;
+  };
+
+   /* Retrive last basket settings upon page refresh */
+   useEffect(() => {
     let cachedArray = JSON.parse(localStorage.getItem("array"));
-    if(cachedArray) {
+    if (cachedArray) {
       setProducts(cachedArray);
     }
-  }, []);
+  }, []); 
 
   /* Cache products in the local storage */
-  useEffect(() => {
+   useEffect(() => {
     localStorage.setItem("array", JSON.stringify(products));
-  }, [products]);
+  }, [products]); 
+ 
 
   useEffect(() => {
     setTotalCost(getTotalCost(products));
@@ -63,10 +71,7 @@ const Main = () => {
 
   const getTotalCost = (items) => {
     try {
-      return items.reduce(
-        (prev, curr) => prev + curr.cost * curr.quantity,
-        0
-      );
+      return items.reduce((prev, curr) => prev + curr.cost * curr.quantity, 0);
     } catch (e) {
       console.log("Array is null");
     }
@@ -85,8 +90,8 @@ const Main = () => {
               key={index}
               name={product.name}
               sendQty={(qty) => refreshItemQty(qty, index)}
-              price={product.cost}
-              quantity={product.quantity}
+              price={costFormatter(product.cost)}
+              quantity={qtyFormatter(product.quantity)}
             ></Item>
           ))}
       </div>
