@@ -7,3 +7,4 @@ A 24-hour React challenge. This is a shopping basket with hardcoded items. This 
 # Technologies
 - React
 - Tailwind
+- React Router
