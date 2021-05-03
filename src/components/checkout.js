@@ -10,7 +10,7 @@ const Checkout = () => {
             Your Delivery Information
           </legend>
           <div className="country-field mt-5">
-            <label for="country">
+            <label htmlFor="country">
               Country<span>*</span>
             </label>
             <select
@@ -25,7 +25,7 @@ const Checkout = () => {
           </div>
           <div className="name-field flex flex-col md:flex-row mt-5">
             <div className="mr-5">
-              <label for="name">
+              <label htmlFor="name">
                 First Name<span>*</span>
               </label>
               <input
@@ -39,7 +39,7 @@ const Checkout = () => {
               ></input>
             </div>
             <div className="mt-5 md:mt-0">
-              <label for="last-name">
+              <label htmlFor="last-name">
                 Last Name<span>*</span>
               </label>
               <input
@@ -54,7 +54,7 @@ const Checkout = () => {
             </div>
           </div>
           <div>
-            <label for="address-1" className="block mt-5">
+            <label htmlFor="address-1" className="block mt-5">
               Address1
               <span>*</span>
             </label>
@@ -67,7 +67,7 @@ const Checkout = () => {
               maxLength="255"
               required
             ></input>
-            <label for="address-2" className="block mt-5">
+            <label htmlFor="address-2" className="block mt-5">
               Address2
             </label>
             <input
@@ -78,7 +78,7 @@ const Checkout = () => {
               size="30"
               maxLength="255"
             ></input>
-            <label for="town-city" className="block mt-5">
+            <label htmlFor="town-city" className="block mt-5">
               Town/City<span>*</span>
             </label>
             <input
@@ -89,7 +89,7 @@ const Checkout = () => {
               size="30"
               maxLength="255"
             ></input>
-            <label for="postcode" className="block mt-5">
+            <label htmlFor="postcode" className="block mt-5">
               Postcode<span>*</span>
             </label>
             <input
@@ -102,7 +102,7 @@ const Checkout = () => {
             ></input>
             <Link to="/">
               <Button label="Continue to next step" />
-            </Link>        
+            </Link>
           </div>
         </fieldset>
       </form>
