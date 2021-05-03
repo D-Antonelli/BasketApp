@@ -1,3 +1,6 @@
+import Button from "./button";
+import { Link } from "react-router-dom";
+
 const Checkout = () => {
   return (
     <div className="absolute overflow-hidden w-9/12 p-6 bg-purple-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg">
@@ -10,7 +13,7 @@ const Checkout = () => {
             <label for="country">
               Country<span>*</span>
             </label>
-            <select 
+            <select
               id="country-select"
               autoComplete="country"
               className="block px-2 py-1"
@@ -20,7 +23,6 @@ const Checkout = () => {
               </option>
             </select>
           </div>
-
           <div className="name-field flex flex-col md:flex-row mt-5">
             <div className="mr-5">
               <label for="name">
@@ -91,19 +93,16 @@ const Checkout = () => {
               Postcode<span>*</span>
             </label>
             <input
-              className="block"
+              className="block mb-8"
               autoComplete="postcode"
               type="text"
               id="postcode"
               size="10"
               maxLength="255"
             ></input>
-            <button
-              type="submit"
-              className="mt-8 capitalize border-2 py-2 px-8 font-medium rounded-xl bg-indigo-900 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-600"
-            >
-              Continue to next step
-            </button>
+            <Link to="/">
+              <Button label="Continue to next step" />
+            </Link>        
           </div>
         </fieldset>
       </form>
