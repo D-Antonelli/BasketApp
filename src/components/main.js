@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Item from "./item";
+import Button from "./button";
 import TableHeaderRow from "./tableHeaderRow";
 
 const items = [
   {
     name: "Mountain Dew",
-    cost: "14.52",
+    cost: "24.90",
     quantity: 2,
   },
 
@@ -21,7 +22,7 @@ const items = [
     quantity: 2,
   },
 ];
-//localStorage.clear()
+
 const Main = () => {
   const [totalCost, setTotalCost] = useState(0);
   const [products, setProducts] = useState(items);
@@ -43,27 +44,18 @@ const Main = () => {
     setProducts(newArr);
   };
 
-  const qtyFormatter = (qty) => {
-    return qty >= 0 && qty % 1 === 0 ? qty : 0;
-  };
-
-  const costFormatter = (cost) => {
-    return cost >= 0 ? cost : 0;
-  };
-
-   /* Retrive last basket settings upon page refresh */
-   useEffect(() => {
+  /* Retrive last basket settings upon page refresh */
+  useEffect(() => {
     let cachedArray = JSON.parse(localStorage.getItem("array"));
     if (cachedArray) {
       setProducts(cachedArray);
     }
-  }, []); 
+  }, []);
 
   /* Cache products in the local storage */
-   useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("array", JSON.stringify(products));
-  }, [products]); 
- 
+  }, [products]);
 
   useEffect(() => {
     setTotalCost(getTotalCost(products));
@@ -90,8 +82,8 @@ const Main = () => {
               key={index}
               name={product.name}
               sendQty={(qty) => refreshItemQty(qty, index)}
-              price={costFormatter(product.cost)}
-              quantity={qtyFormatter(product.quantity)}
+              cost={product.cost}
+              quantity={product.quantity}
             ></Item>
           ))}
       </div>
@@ -109,9 +101,7 @@ const Main = () => {
             clear
           </button>
           <Link to="/checkout">
-            <button className="ml-4 capitalize border-2 py-2 px-8 font-medium rounded-xl bg-indigo-900 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-purple-600">
-              checkout
-            </button>
+            <Button label="checkout"/>
           </Link>
         </div>
       </div>
