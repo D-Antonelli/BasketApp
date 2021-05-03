@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
 
-const Item = ({ name, price, sendQty, quantity}) => {
+const Item = ({ name, cost, sendQty, quantity }) => {
   const [totalCost, setTotalCost] = useState(0);
 
   const onQtyChange = (e) => {
-      let userQtyInput = e.target.value;
-      //check if quantity is number && not floating number
-      if(!isNaN(userQtyInput) && !userQtyInput.includes("." || "," || "-")) {
-        sendQty((userQtyInput));
-      }
+    let userQtyInput = e.target.value;
+    //check if quantity is number && not floating number
+    if (!isNaN(userQtyInput) && !userQtyInput.includes("." || "," || "-")) {
+      sendQty(userQtyInput);
+    }
   };
 
-  const calcTotalCost = (qty, price) => {
-    let total = qty * price;
-    return total.toFixed(2);
-  }
-
   useEffect(() => {
-    setTotalCost(calcTotalCost(quantity, price));
-  }, [price, quantity]);
+    setTotalCost(quantity * cost);
+  }, [cost, quantity]);
 
   return (
-    <table className="item h-16 flex items-center border-b-2">
+    <table
+      className="item h-16 flex items-center border-b-2"
+      data-testid="item"
+    >
+      <tbody>
         <tr className="itemRow">
           <td className="w-96">
             <h3 className="font-bold">{name}</h3>
@@ -33,16 +32,16 @@ const Item = ({ name, price, sendQty, quantity}) => {
               maxLength="3"
               onChange={onQtyChange}
               value={quantity}
-              data-testid="inputTest"
             ></input>
           </td>
           <td className="cost w-32">
-            <h4 data-testid="costTest">${totalCost}</h4>
+            <h4>${totalCost >= 0 ? totalCost.toFixed(2) : NaN}</h4>
           </td>
           <td>
             <button>x</button>
           </td>
         </tr>
+      </tbody>
     </table>
   );
 };
