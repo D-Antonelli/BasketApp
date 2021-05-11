@@ -16,8 +16,8 @@ const Item = ({ name, cost, sendQty, quantity }) => {
   }, [cost, quantity]);
 
   return (
-    <React.Fragment className="item h-16 flex items-center" data-testid="item">
-      <tr className="itemRow border-b-2">
+    <React.Fragment>
+      <tr className="itemRow border-b-2" data-testid="item">
         <td className="font-bold py-4">{name}</td>
         <td className="py-4">
           <input
