@@ -70,11 +70,11 @@ const Main = () => {
   };
 
   return (
-    <div className="basket h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
-      {/* product title */}
-      <TableHeaderRow row1="product" row2="quantity" row3="total" />
-      {/* basket*/}
-      <div className="items">
+    <div className="basket flex justify-between flex-col w-2/5 h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
+      <table className="table-fixed">
+        {/* product title */}
+        <TableHeaderRow row1="product" row2="quantity" row3="total" />
+        {/* basket*/}
         {products &&
           products.length > 0 &&
           products.map((product, index) => (
@@ -86,9 +86,9 @@ const Main = () => {
               quantity={product.quantity}
             ></Item>
           ))}
-      </div>
+      </table>
       {/* basket totals */}
-      <div className="totals flex flex-col items-end mt-5">
+      <div className="totals flex flex-col items-end mt-5 w-full">
         <h3 className="font-bold">
           <span className="capitalize mr-5">subtotal:</span>$
           {(totalCost && totalCost.toFixed(2)) || 0}
@@ -101,7 +101,7 @@ const Main = () => {
             clear
           </button>
           <Link to="/checkout">
-            <Button label="checkout"/>
+            <Button label="checkout" />
           </Link>
         </div>
       </div>

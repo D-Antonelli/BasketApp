@@ -16,33 +16,26 @@ const Item = ({ name, cost, sendQty, quantity }) => {
   }, [cost, quantity]);
 
   return (
-    <table
-      className="item h-16 flex items-center border-b-2"
-      data-testid="item"
-    >
-      <tbody>
-        <tr className="itemRow">
-          <td className="w-96">
-            <h3 className="font-bold">{name}</h3>
-          </td>
-          <td className="w-32">
-            <input
-              className="changeQuantity capitalize border rounded h-8 text-center"
-              size="2"
-              maxLength="3"
-              onChange={onQtyChange}
-              value={quantity}
-            ></input>
-          </td>
-          <td className="cost w-32">
-            <h4>${totalCost >= 0 ? totalCost.toFixed(2) : NaN}</h4>
-          </td>
-          <td>
-            <button>x</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <React.Fragment className="item h-16 flex items-center" data-testid="item">
+      <tr className="itemRow border-b-2">
+        <td className="font-bold py-4">{name}</td>
+        <td className="py-4">
+          <input
+            className="changeQuantity capitalize border rounded h-8 text-center"
+            size="2"
+            maxLength="3"
+            onChange={onQtyChange}
+            value={quantity}
+          ></input>
+        </td>
+        <td className="cost py-4">
+          ${totalCost >= 0 ? totalCost.toFixed(2) : NaN}
+        </td>
+        <td className="py-4">
+          <button>x</button>
+        </td>
+      </tr>
+    </React.Fragment>
   );
 };
 

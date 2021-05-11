@@ -1,18 +1,15 @@
-const TableHeaderRow = ({row1, row2, row3}) => {
+import React from "react";
+
+const TableHeaderRow = ({ row1, row2, row3 }) => {
   return (
-    <table className="title-row hidden bg-gray-300 pt-2 pb-2 md:block">
-      <thead>
-        <tr>
-          <td>
-            <h3 className="w-96 capitalize font-bold">{row1}</h3>
-          </td>
-          <td>
-            <h3 className="w-32 capitalize font-bold">{row2}</h3>
-          </td>
-          <td className="w-32 capitalize font-bold">{row3}</td>
-        </tr>
-      </thead>
-    </table>
+    <React.Fragment className="title-row hidden bg-gray-300 md:block">
+      <tr className="bg-gray-300">
+        <th className="capitalize font-bold text-left py-2 w-1/2">{row1}</th>
+        <th className="capitalize font-bold text-left py-2 w-1/4">{row2}</th>
+        <th className="capitalize font-bold text-left py-2 w-1/4">{row3}</th>
+        <th></th>
+      </tr>
+    </React.Fragment>
   );
 };
 
