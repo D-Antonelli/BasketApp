@@ -8,3 +8,6 @@ A 24-hour React challenge. This is a shopping basket with hardcoded items. This 
 - React
 - Tailwind
 - React Router
+
+# Test
+- React testing library
