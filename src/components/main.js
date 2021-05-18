@@ -70,7 +70,7 @@ const Main = () => {
   };
 
   return (
-    <div className="basket flex justify-between flex-col w-2/5 h-3/5 p-6 bg-purple-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg overflow-y-scroll">
+    <div className="basket md:text-lg flex justify-between flex-col m-auto mt-6 md:mt-12 lg:mt-24 mb-6 w-11/12 md:10/12 lg:w-9/12 xl:w-8/12 2xl:w-7/12 p-6 bg-purple-50 rounded shadow-lg">
       <table className="table-fixed">
         {/* product title */}
         <TableHeaderRow row1="product" row2="quantity" row3="total" />

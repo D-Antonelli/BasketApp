@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Checkout = () => {
   return (
-    <div className="absolute overflow-hidden w-9/12 p-6 bg-purple-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded shadow-lg">
+    <div className="md:text-lg w-11/12 md:w-10/12 2xl:w-6/12 p-6 bg-purple-50 m-auto mt-6 md:mt-12 mb-6 rounded shadow-lg">
       <form action="#">
         <fieldset>
           <legend className="bg-gray-300 pt-2 pb-2 w-full pt-2 pb-2 block font-bold">

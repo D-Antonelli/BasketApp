@@ -9,7 +9,6 @@ import {
 
 const App = () => {
   return (
-    <div className="App h-screen bg-indigo-200 text-lg overflow-hidden">
       <Router>
         <Switch>
           <Switch>
@@ -18,7 +17,6 @@ const App = () => {
           </Switch>
         </Switch>
       </Router>
-    </div>
   );
 };
 
